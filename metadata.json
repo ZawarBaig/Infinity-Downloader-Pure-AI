@@ -1,0 +1,6 @@
+{
+  "name": "Infinity Video Downloader",
+  "description": "Infinity Video Downloader: A professional-grade, high-performance background downloader featuring embedded yt-dlp extracting and FFmpeg stream merging, developed by Zawar Baig.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
