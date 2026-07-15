@@ -20,7 +20,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7' 
 
       - name: Copy Environment Example
         run: |
@@ -31,14 +35,12 @@ jobs:
             touch .env
           fi
 
-      - name: Make Gradle Wrapper Executable
-        run: chmod +x gradlew
-
       - name: Compile and Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: infinity-video-downloader-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
