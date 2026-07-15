@@ -24,17 +24,17 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          # Updated to 9.3.1 to satisfy the Android Gradle Plugin requirement
           gradle-version: '9.3.1' 
 
-      - name: Copy Environment Example
+      - name: Ensure Environment Files Exist
         run: |
-          if [ -f .env.example ]; then
-            cp .env.example .env
-          else
-            echo "No .env.example found, creating empty .env"
-            touch .env
+          # If .env.example doesn't exist, create an empty one to satisfy Gradle
+          if [ ! -f .env.example ]; then
+            echo "No .env.example found, creating an empty .env.example"
+            touch .env.example
           fi
+          # Now safely copy it to .env
+          cp .env.example .env
 
       - name: Compile and Build Debug APK
         run: gradle assembleDebug --no-daemon
