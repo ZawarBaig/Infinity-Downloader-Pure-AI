@@ -36,10 +36,23 @@ jobs:
 
       - name: Generate Dummy Google Services JSON
         run: |
-          # Creates a mock google-services.json with YOUR actual package name
+          # Creates a mock google-services.json with the required api_key structure
           echo '{
-            "project_info": { "project_number": "123456789012", "project_id": "mock-project" },
-            "client": [ { "client_info": { "mobilesdk_app_id": "1:123456789012:android:0000000000000000000000", "android_client_info": { "package_name": "com.aistudio.videodownloader.vxdl" } } } ]
+            "project_info": { 
+              "project_number": "123456789012", 
+              "project_id": "mock-project" 
+            },
+            "client": [ 
+              { 
+                "client_info": { 
+                  "mobilesdk_app_id": "1:123456789012:android:0000000000000000000000", 
+                  "android_client_info": { "package_name": "com.aistudio.videodownloader.vxdl" } 
+                },
+                "api_key": [ 
+                  { "current_key": "AIzaSyDummyKeyForBuilds1234567890" } 
+                ]
+              } 
+            ]
           }' > app/google-services.json
 
       - name: Generate Debug Keystore
