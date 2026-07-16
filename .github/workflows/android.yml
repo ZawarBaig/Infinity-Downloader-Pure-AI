@@ -36,15 +36,14 @@ jobs:
 
       - name: Generate Dummy Google Services JSON
         run: |
-          # Creates a mock google-services.json to prevent the Google Services plugin from failing
+          # Creates a mock google-services.json with YOUR actual package name
           echo '{
             "project_info": { "project_number": "123456789012", "project_id": "mock-project" },
-            "client": [ { "client_info": { "mobilesdk_app_id": "1:123456789012:android:0000000000000000000000", "android_client_info": { "package_name": "com.example" } } } ]
+            "client": [ { "client_info": { "mobilesdk_app_id": "1:123456789012:android:0000000000000000000000", "android_client_info": { "package_name": "com.aistudio.videodownloader.vxdl" } } } ]
           }' > app/google-services.json
 
       - name: Generate Debug Keystore
         run: |
-          # Generates a temporary debug.keystore on the CI runner
           keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
 
       - name: Compile and Build Debug APK
